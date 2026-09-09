@@ -52,10 +52,30 @@ export async function getWeatherByCoordinates(latitude, longitude) {
  */
 export async function getCoordinatesByCity(nome) {
   // TODO 1: Costruisci l'URL per l'API usando la costante API_CITTÀ
-  // Parametri richiesti: name (il nome passato alla funzione), count=10, language=it
-  // Dopodichè effettua la fetch e lancia un Error se la risposta non è ok
-  // Infine estrai il JSON. Se non ci sono risultati (dati.results è vuoto o assente), lancia un Error.
-  // Altrimenti, ritorna l'array dei risultati.
+  const URL = `${API_CITTÀ}?name=${encodeURIComponent(nome)}&count=10&language=it`;
+
+  try {
+    const response = await fetch(URL);
+
+    // Controlla se la risposta HTTP non è OK (status non compreso tra 200 e 299)
+    if (!response.ok) {
+      throw new Error(`Errore nella richiesta HTTP (status: ${response.status})`);
+    }
+
+    // Estrai il JSON
+    const dati = await response.json();
+
+    // Se non ci sono risultati (dati.results è vuoto o assente), lancia un Error
+    if (!dati.results || dati.results.length === 0) {
+      throw new Error(`Nessuna città trovata con il nome "${nome}"`);
+    }
+
+    // Altrimenti, ritorna l'array dei risultati
+    return dati.results;
+  } catch (error) {
+    // Rilancia l'errore per farlo gestire a chi chiama la funzione
+    throw new Error(`Errore nella ricerca della città: ${error.message}`);
+  }
 }
 
 /**
