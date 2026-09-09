@@ -433,7 +433,8 @@ input::placeholder {
   /* TODO 2: L'icona gigante del meteo e la temperatura sono disallineati e si posizionano
        uno sotto l'altro. Ripristina il layout in modo che stiano sulla stessa
        riga e siano allineati verticalmente al centro. */
-  display: block;
+  display: flex;
+  align-items: center;
 
   gap: var(--space-4);
 }
@@ -600,12 +601,20 @@ input::placeholder {
 
 .btn-favorite-inline {
   /* TODO 2: Il pulsante dei preferiti in linea ha perso il suo stile.
-       Ricrea le regole CSS per renderlo un bottone circolare:
-       - Larghezza e altezza fisse (es: 2.2rem)
-       - Raggio del bordo per renderlo un cerchio perfetto
-       - Rimuovi il padding
-       - Aggiungi un'ombra leggera (box-shadow)
-    */
+     Ricrea le regole CSS per renderlo un bottone circolare:
+     - Larghezza e altezza fisse (es: 2.2rem)
+     - Raggio del bordo per renderlo un cerchio perfetto
+     - Rimuovi il padding
+     - Aggiungi un'ombra leggera (box-shadow)
+  */
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .location-forecast .forecast-grid {

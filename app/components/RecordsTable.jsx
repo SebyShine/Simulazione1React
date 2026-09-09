@@ -38,7 +38,7 @@ function RecordsTable({
   function handleClearAll() {
     const conferma = confirm('Sei sicuro?');
 
-    if (!conferma) {
+    if (conferma) {
       onDeleteAll();
     }
   }
